@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "63579187504",
+    "project_id": "fogguard-e083",
+    "storage_bucket": "fogguard-e083.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:63579187504:android:71c3d275c93d7b619bc0f5",
+        "android_client_info": {
+          "package_name": "com.example.fogguard_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGqGcQ92TQDjgjwx1WUuuiwtwtHT4rOpw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
