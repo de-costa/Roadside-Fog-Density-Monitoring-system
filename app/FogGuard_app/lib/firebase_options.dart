@@ -46,6 +46,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '63579187504',
     projectId: 'fogguard-e083',
     authDomain: 'fogguard-e083.firebaseapp.com',
+    databaseURL: 'https://fogguard-e083-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'fogguard-e083.firebasestorage.app',
     measurementId: 'G-9QP3MCDMMR',
   );
@@ -55,6 +56,7 @@ class DefaultFirebaseOptions {
     appId: '1:63579187504:android:71c3d275c93d7b619bc0f5',
     messagingSenderId: '63579187504',
     projectId: 'fogguard-e083',
+    databaseURL: 'https://fogguard-e083-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'fogguard-e083.firebasestorage.app',
   );
 
@@ -63,6 +65,7 @@ class DefaultFirebaseOptions {
     appId: '1:63579187504:ios:47cbd770a8629d9e9bc0f5',
     messagingSenderId: '63579187504',
     projectId: 'fogguard-e083',
+    databaseURL: 'https://fogguard-e083-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'fogguard-e083.firebasestorage.app',
     iosBundleId: 'com.example.fogguardApp',
   );
@@ -72,6 +75,7 @@ class DefaultFirebaseOptions {
     appId: '1:63579187504:ios:47cbd770a8629d9e9bc0f5',
     messagingSenderId: '63579187504',
     projectId: 'fogguard-e083',
+    databaseURL: 'https://fogguard-e083-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'fogguard-e083.firebasestorage.app',
     iosBundleId: 'com.example.fogguardApp',
   );
@@ -82,6 +86,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '63579187504',
     projectId: 'fogguard-e083',
     authDomain: 'fogguard-e083.firebaseapp.com',
+    databaseURL: 'https://fogguard-e083-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'fogguard-e083.firebasestorage.app',
     measurementId: 'G-J67C9T5Y4C',
   );
