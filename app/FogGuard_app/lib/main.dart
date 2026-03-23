@@ -8,49 +8,49 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   try {
     if (Firebase.apps.isEmpty) {
-      await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
     }
   } catch (e, st) {
     debugPrint('Firebase initialization failed: $e');
     debugPrint('$st');
   }
 
-  runApp(FogGuardApp());
+  runApp(const FogGuardApp());
 }
 
 class FogGuardApp extends StatelessWidget {
+  const FogGuardApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'FogGuard',
       theme: ThemeData.dark(),
-      home: SplashScreen(),
+      home: const SplashScreen(),
     );
   }
 }
 
-//
-// ================= SPLASH SCREEN =================
-//
-
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   @override
   void initState() {
     super.initState();
 
-    Timer(Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 3), () {
       if (!mounted) return;
-      debugPrint('Splash timeout: navigating to RouteScreen');
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => RouteScreen()),
+        MaterialPageRoute(builder: (_) => const RouteScreen()),
       );
     });
   }
@@ -59,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
               Color(0xFF0A1F44),
@@ -68,41 +68,26 @@ class _SplashScreenState extends State<SplashScreen> {
             ],
           ),
         ),
-        child: Center(
+        child: const Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-
-              Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.cyanAccent.withAlpha((0.6 * 255).toInt()),
-                      blurRadius: 30,
-                      spreadRadius: 5,
-                    ),
-                  ],
+              _SplashIcon(),
+              SizedBox(height: 40),
+              Text(
+                "FogGuard",
+                style: TextStyle(
+                  fontSize: 40,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
                 ),
-                child: Icon(Icons.wifi_tethering,
-                    size: 90, color: Colors.cyanAccent),
               ),
-
-              SizedBox(height: 40),
-
-              Text("FogGuard",
-                  style: TextStyle(
-                      fontSize: 40,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold)),
-
               SizedBox(height: 10),
-
-              Text("Smart Fog Monitoring",
-                  style: TextStyle(fontSize: 18, color: Colors.cyanAccent)),
-
+              Text(
+                "Smart Fog Monitoring",
+                style: TextStyle(fontSize: 18, color: Colors.cyanAccent),
+              ),
               SizedBox(height: 40),
-
               CircularProgressIndicator(color: Colors.cyanAccent),
             ],
           ),
@@ -112,11 +97,42 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 }
 
-//
-// ================= ROUTE SCREEN =================
-//
+class _SplashIcon extends StatelessWidget {
+  const _SplashIcon();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 100,
+      height: 100,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(50),
+        gradient: LinearGradient(
+          colors: [
+            Color(0xFF0A1F44),
+            Color(0xFF0D2A5E),
+            Color(0xFF061530),
+          ],
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.cyanAccent.withAlpha((0.6 * 255).toInt()),
+            blurRadius: 30,
+            spreadRadius: 5,
+          ),
+        ],
+      ),
+      child: const Icon(
+        Icons.wifi_tethering,
+        size: 90,
+        color: Colors.cyanAccent,
+      ),
+    );
+  }
+}
 
 class RouteScreen extends StatelessWidget {
+  const RouteScreen({super.key});
 
   Widget buildRouteCard(BuildContext context, String title) {
     return GestureDetector(
@@ -125,31 +141,73 @@ class RouteScreen extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => NodeListScreen(routeName: title),
+              builder: (_) => NodeListScreen(routeName: title),
             ),
           );
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Coming soon")),
+            const SnackBar(content: Text("Coming soon")),
           );
         }
       },
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 10),
-        padding: EdgeInsets.all(18),
+        margin: const EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.all(18),
         decoration: BoxDecoration(
-          color: Color(0xFF112A5C),
+          color: const Color(0xFF112A5C),
           borderRadius: BorderRadius.circular(15),
         ),
-        child: Row(
+        child: const Row(
           children: [
             Icon(Icons.route, color: Colors.cyanAccent),
             SizedBox(width: 15),
             Expanded(
-              child: Text(title,
-                  style: TextStyle(color: Colors.white, fontSize: 16)),
+              child: Text(
+                "placeholder",
+                style: TextStyle(color: Colors.white, fontSize: 16),
+              ),
             ),
             Icon(Icons.arrow_forward_ios, color: Colors.white, size: 16),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildRealRouteCard(BuildContext context, String title) {
+    return GestureDetector(
+      onTap: () {
+        if (title == "Colombo → Jaffna") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => NodeListScreen(routeName: title),
+            ),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Coming soon")),
+          );
+        }
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.all(18),
+        decoration: BoxDecoration(
+          color: const Color(0xFF112A5C),
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Row(
+          children: [
+            const Icon(Icons.route, color: Colors.cyanAccent),
+            const SizedBox(width: 15),
+            Expanded(
+              child: Text(
+                title,
+                style: const TextStyle(color: Colors.white, fontSize: 16),
+              ),
+            ),
+            const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 16),
           ],
         ),
       ),
@@ -159,34 +217,32 @@ class RouteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF0A1F44),
+      backgroundColor: const Color(0xFF0A1F44),
       appBar: AppBar(
-        backgroundColor: Color(0xFF0A1F44),
-        title: Text("Welcome"),
+        backgroundColor: const Color(0xFF0A1F44),
+        title: const Text("Welcome"),
         centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            SizedBox(height: 20),
-            Text("Choose Your Route",
-                style: TextStyle(fontSize: 24, color: Colors.white)),
-            SizedBox(height: 25),
-            buildRouteCard(context, "Colombo → Jaffna"),
-            buildRouteCard(context, "Kandy → Nuwara Eliya"),
-            buildRouteCard(context, "Colombo → Kandy"),
-            buildRouteCard(context, "Badulla → Ella"),
+            const SizedBox(height: 20),
+            const Text(
+              "Choose Your Route",
+              style: TextStyle(fontSize: 24, color: Colors.white),
+            ),
+            const SizedBox(height: 25),
+            buildRealRouteCard(context, "Colombo → Jaffna"),
+            buildRealRouteCard(context, "Kandy → Nuwara Eliya"),
+            buildRealRouteCard(context, "Colombo → Kandy"),
+            buildRealRouteCard(context, "Badulla → Ella"),
           ],
         ),
       ),
     );
   }
 }
-
-//
-// ================= DATA MODEL =================
-//
 
 class FogNode {
   final String id;
@@ -208,22 +264,52 @@ class FogNode {
   });
 }
 
-//
-// ================= NODE DETAIL SCREEN =================
-//
+int parseFogLevel(dynamic value) {
+  if (value == null) return 1;
+  if (value is int) return value;
+  if (value is double) return value.toInt();
+  return int.tryParse(value.toString()) ?? 1;
+}
+
+double parseHumidity(dynamic value) {
+  if (value == null) return 0.0;
+  if (value is int) return value.toDouble();
+  if (value is double) return value;
+  return double.tryParse(value.toString()) ?? 0.0;
+}
+
+DateTime parseDate(dynamic value) {
+  if (value == null) return DateTime.now();
+  return DateTime.tryParse(value.toString()) ?? DateTime.now();
+}
+
+Color fogColor(int level) {
+  if (level == 1) return Colors.green;
+  if (level == 2) return Colors.yellow;
+  if (level == 3) return Colors.red;
+  return Colors.grey;
+}
+
+String fogText(int level) {
+  if (level == 1) return "LOW";
+  if (level == 2) return "MEDIUM";
+  if (level == 3) return "HIGH";
+  return "UNKNOWN";
+}
 
 class NodeDetailScreen extends StatefulWidget {
   final FogNode node;
 
-  NodeDetailScreen({required this.node});
+  const NodeDetailScreen({super.key, required this.node});
 
   @override
-  _NodeDetailScreenState createState() => _NodeDetailScreenState();
+  State<NodeDetailScreen> createState() => _NodeDetailScreenState();
 }
 
 class _NodeDetailScreenState extends State<NodeDetailScreen> {
   late FogNode currentNode;
   DatabaseReference? _nodeRef;
+  StreamSubscription<DatabaseEvent>? _subscription;
   bool isLoading = true;
 
   @override
@@ -234,47 +320,37 @@ class _NodeDetailScreenState extends State<NodeDetailScreen> {
       app: Firebase.app(),
       databaseURL: DefaultFirebaseOptions.currentPlatform.databaseURL,
     ).ref('fog_nodes/${widget.node.id}');
-    debugPrint('NodeDetailScreen initState ref: fog_nodes/${widget.node.id}');
     fetchNodeData();
   }
 
   void fetchNodeData() {
     if (_nodeRef == null) {
-      debugPrint('NodeDetailScreen fetchNodeData: _nodeRef is null');
-      setState(() {
-        isLoading = false;
-      });
+      setState(() => isLoading = false);
       return;
     }
 
-    debugPrint('NodeDetailScreen fetchNodeData from ${_nodeRef!.path}');
-
-    _nodeRef!.onValue.listen((event) {
+    _subscription?.cancel();
+    _subscription = _nodeRef!.onValue.listen((event) {
       final data = event.snapshot.value;
-      debugPrint('NodeDetailScreen event value: $data');
+
       if (data != null && data is Map<dynamic, dynamic>) {
         setState(() {
           currentNode = FogNode(
             id: currentNode.id,
-            name: data['name'] ?? currentNode.name,
-            fogLevel: data['fogLevel'] ?? currentNode.fogLevel,
-            humidity: (data['humidity'] ?? currentNode.humidity).toDouble(),
-            location: data['location'] ?? currentNode.location,
-            warning: data['warning'] ?? currentNode.warning,
-            lastUpdated: DateTime.tryParse(data['lastUpdated'] ?? '') ?? currentNode.lastUpdated,
+            name: (data['name'] ?? currentNode.name).toString(),
+            fogLevel: parseFogLevel(data['fogLevel']),
+            humidity: parseHumidity(data['humidity']),
+            location: (data['location'] ?? currentNode.location).toString(),
+            warning: (data['warning'] ?? currentNode.warning).toString(),
+            lastUpdated: parseDate(data['lastUpdated']),
           );
           isLoading = false;
         });
       } else {
-        setState(() {
-          isLoading = false;
-        });
+        setState(() => isLoading = false);
       }
     }, onError: (error) {
-      setState(() {
-        isLoading = false;
-      });
-      debugPrint('NodeDetailScreen fetch error: $error');
+      setState(() => isLoading = false);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Error fetching node data: $error")),
       );
@@ -282,96 +358,84 @@ class _NodeDetailScreenState extends State<NodeDetailScreen> {
   }
 
   void refreshData() {
-    setState(() {
-      isLoading = true;
-    });
+    setState(() => isLoading = true);
     fetchNodeData();
   }
 
-  Color getColor(int level) {
-    if (level == 0) return Colors.green;
-    if (level == 1) return Colors.yellow;
-    return Colors.red;
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    super.dispose();
   }
 
-  String getText(int level) {
-    if (level == 0) return "LOW";
-    if (level == 1) return "MEDIUM";
-    return "HIGH";
+  Widget _buildInfoCard(IconData icon, String title, String value, Color? valueColor) {
+    return Card(
+      color: const Color(0xFF112A5C),
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: ListTile(
+        leading: Icon(icon, color: Colors.cyanAccent, size: 28),
+        title: Text(
+          title,
+          style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
+        ),
+        subtitle: Text(
+          value,
+          style: TextStyle(
+            color: valueColor ?? Colors.white70,
+            fontSize: 14,
+          ),
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF0A1F44),
+      backgroundColor: const Color(0xFF0A1F44),
       appBar: AppBar(
-        backgroundColor: Color(0xFF0A1F44),
+        backgroundColor: const Color(0xFF0A1F44),
         title: Text(currentNode.name),
         centerTitle: true,
         actions: [
           IconButton(
-            icon: Icon(Icons.refresh),
+            icon: const Icon(Icons.refresh),
             onPressed: refreshData,
           ),
         ],
       ),
       body: isLoading
-          ? Center(
-              child: CircularProgressIndicator(color: Colors.cyanAccent),
-            )
-          : Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 20),
-                  Text("Location: ${currentNode.location}",
-                      style: TextStyle(color: Colors.white, fontSize: 18)),
-                  SizedBox(height: 20),
-                  Row(
-                    children: [
-                      Text("Fog Level: ",
-                          style: TextStyle(color: Colors.white, fontSize: 18)),
-                      Text(getText(currentNode.fogLevel),
-                          style: TextStyle(
-                              color: getColor(currentNode.fogLevel),
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold)),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  Text("Humidity: ${currentNode.humidity.toStringAsFixed(1)}%",
-                      style: TextStyle(color: Colors.white, fontSize: 18)),
-                  SizedBox(height: 20),
-                  Text("Warning: ${currentNode.warning}",
-                      style: TextStyle(color: Colors.cyanAccent, fontSize: 18)),
-                  SizedBox(height: 20),
-                  Text("Last Updated: ${currentNode.lastUpdated.toString()}",
-                      style: TextStyle(color: Colors.grey, fontSize: 14)),
-                ],
-              ),
-            ),
+          ? const Center(
+        child: CircularProgressIndicator(color: Colors.cyanAccent),
+      )
+          : ListView(
+        padding: const EdgeInsets.all(20),
+        children: [
+          _buildInfoCard(Icons.location_on, "Location", currentNode.location, null),
+          _buildInfoCard(Icons.cloud, "Fog Level", "${fogText(currentNode.fogLevel)} (${currentNode.fogLevel})", fogColor(currentNode.fogLevel)),
+          _buildInfoCard(Icons.water_drop, "Humidity", "${currentNode.humidity.toStringAsFixed(1)}%", null),
+          _buildInfoCard(Icons.warning_amber, "Warning", currentNode.warning, Colors.cyanAccent),
+          _buildInfoCard(Icons.access_time, "Last Updated", currentNode.lastUpdated.toString(), Colors.grey),
+        ],
+      ),
     );
   }
 }
 
-//
-// ================= NODE LIST SCREEN =================
-//
-
 class NodeListScreen extends StatefulWidget {
   final String routeName;
 
-  NodeListScreen({required this.routeName});
+  const NodeListScreen({super.key, required this.routeName});
 
   @override
-  _NodeListScreenState createState() => _NodeListScreenState();
+  State<NodeListScreen> createState() => _NodeListScreenState();
 }
 
 class _NodeListScreenState extends State<NodeListScreen> {
-
   List<FogNode> nodes = [];
   DatabaseReference? _databaseRef;
+  StreamSubscription<DatabaseEvent>? _subscription;
   bool isLoading = true;
 
   @override
@@ -381,44 +445,32 @@ class _NodeListScreenState extends State<NodeListScreen> {
       app: Firebase.app(),
       databaseURL: DefaultFirebaseOptions.currentPlatform.databaseURL,
     ).ref('fog_nodes');
-    debugPrint('NodeListScreen initState db ref: fog_nodes');
     fetchData();
   }
 
   Future<void> fetchData() async {
     if (_databaseRef == null) {
-      debugPrint('NodeListScreen fetchData: _databaseRef is null');
-      setState(() {
-        isLoading = false;
-      });
+      setState(() => isLoading = false);
       return;
     }
 
-    setState(() {
-      isLoading = true;
-    });
+    setState(() => isLoading = true);
 
     try {
       final snapshot = await _databaseRef!.get();
       handleSnapshot(snapshot);
-    } catch (e, st) {
-      debugPrint('NodeListScreen fetchData get failure: $e\n$st');
-      setState(() {
-        isLoading = false;
-      });
+    } catch (e) {
+      setState(() => isLoading = false);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error fetching data: $e')),
       );
     }
 
-    _databaseRef!.onValue.listen((event) {
-      debugPrint('NodeListScreen onValue event received');
+    _subscription?.cancel();
+    _subscription = _databaseRef!.onValue.listen((event) {
       handleSnapshot(event.snapshot);
     }, onError: (error) {
-      debugPrint('NodeListScreen onValue error: $error');
-      setState(() {
-        isLoading = false;
-      });
+      setState(() => isLoading = false);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error fetching data: $error')),
       );
@@ -427,18 +479,19 @@ class _NodeListScreenState extends State<NodeListScreen> {
 
   void handleSnapshot(DataSnapshot snapshot) {
     final data = snapshot.value;
+
     if (data != null && data is Map<dynamic, dynamic>) {
       setState(() {
         nodes = data.entries.map((entry) {
           final nodeData = entry.value as Map<dynamic, dynamic>;
           return FogNode(
-            id: entry.key,
-            name: nodeData['name'] ?? entry.key,
-            fogLevel: nodeData['fogLevel'] ?? 0,
-            humidity: (nodeData['humidity'] ?? 0).toDouble(),
-            location: nodeData['location'] ?? 'Unknown',
-            warning: nodeData['warning'] ?? 'No warning',
-            lastUpdated: DateTime.tryParse(nodeData['lastUpdated'] ?? '') ?? DateTime.now(),
+            id: entry.key.toString(),
+            name: (nodeData['name'] ?? entry.key).toString(),
+            fogLevel: parseFogLevel(nodeData['fogLevel']),
+            humidity: parseHumidity(nodeData['humidity']),
+            location: (nodeData['location'] ?? 'Unknown').toString(),
+            warning: (nodeData['warning'] ?? 'No warning').toString(),
+            lastUpdated: parseDate(nodeData['lastUpdated']),
           );
         }).toList();
         isLoading = false;
@@ -451,16 +504,10 @@ class _NodeListScreenState extends State<NodeListScreen> {
     }
   }
 
-  Color getColor(int level) {
-    if (level == 0) return Colors.green;
-    if (level == 1) return Colors.yellow;
-    return Colors.red;
-  }
-
-  String getText(int level) {
-    if (level == 0) return "LOW";
-    if (level == 1) return "MEDIUM";
-    return "HIGH";
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    super.dispose();
   }
 
   Widget buildNodeCard(FogNode node) {
@@ -469,43 +516,41 @@ class _NodeListScreenState extends State<NodeListScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => NodeDetailScreen(node: node),
+            builder: (_) => NodeDetailScreen(node: node),
           ),
         );
       },
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 10),
-        padding: EdgeInsets.all(18),
+        margin: const EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.all(18),
         decoration: BoxDecoration(
-          color: Color(0xFF112A5C),
+          color: const Color(0xFF112A5C),
           borderRadius: BorderRadius.circular(15),
         ),
         child: Row(
           children: [
-
-            Icon(Icons.location_on, color: getColor(node.fogLevel)),
-
-            SizedBox(width: 15),
-
+            Icon(Icons.location_on, color: fogColor(node.fogLevel)),
+            const SizedBox(width: 15),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(node.name,
-                      style: TextStyle(color: Colors.white, fontSize: 16)),
-
-                  SizedBox(height: 5),
-
-                  Text("Humidity: ${node.humidity}%",
-                      style: TextStyle(color: Colors.grey, fontSize: 12)),
+                  Text(
+                    node.name,
+                    style: const TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    "Humidity: ${node.humidity.toStringAsFixed(1)}%",
+                    style: const TextStyle(color: Colors.grey, fontSize: 12),
+                  ),
                 ],
               ),
             ),
-
             Text(
-              getText(node.fogLevel),
+              fogText(node.fogLevel),
               style: TextStyle(
-                color: getColor(node.fogLevel),
+                color: fogColor(node.fogLevel),
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -518,40 +563,39 @@ class _NodeListScreenState extends State<NodeListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF0A1F44),
+      backgroundColor: const Color(0xFF0A1F44),
       appBar: AppBar(
-        backgroundColor: Color(0xFF0A1F44),
+        backgroundColor: const Color(0xFF0A1F44),
         title: Text(widget.routeName),
         centerTitle: true,
       ),
       body: isLoading
-          ? Center(
-              child: CircularProgressIndicator(color: Colors.cyanAccent),
-            )
+          ? const Center(
+        child: CircularProgressIndicator(color: Colors.cyanAccent),
+      )
           : RefreshIndicator(
-              onRefresh: () async {
-                // Refresh data
-                await fetchData();
-              },
-              child: nodes.isEmpty
-                  ? ListView(
-                      children: [
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height - 100,
-                          child: Center(
-                            child: Text("No Data Available",
-                                style: TextStyle(color: Colors.white)),
-                          ),
-                        ),
-                      ],
-                    )
-                  : Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: ListView(
-                        children: nodes.map((node) => buildNodeCard(node)).toList(),
-                      ),
-                    ),
+        onRefresh: fetchData,
+        child: nodes.isEmpty
+            ? ListView(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height - 100,
+              child: const Center(
+                child: Text(
+                  "No Data Available",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
             ),
+          ],
+        )
+            : Padding(
+          padding: const EdgeInsets.all(20),
+          child: ListView(
+            children: nodes.map(buildNodeCard).toList(),
+          ),
+        ),
+      ),
     );
   }
 }
