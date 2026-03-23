@@ -1,16 +1,51 @@
-# fogguard_app
+# 📱 FogGuard Mobile Application
 
-A new Flutter project.
+## 📌 Overview
 
-## Getting Started
+The FogGuard mobile application is a fully developed and functional mobile app built using Flutter and Android Studio. It provides real-time monitoring of roadside fog conditions by retrieving live data from the cloud database and presenting it in a user-friendly interface.
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## 🚀 Features
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+* 🌫️ Real-time fog level monitoring
+* 💧 Humidity data visualization
+* 📍 Location-based node selection
+* ⚠️ Dynamic fog risk warnings (Low / Medium / High)
+* 🔄 Live data updates from Firebase
+* 🎨 Modern and responsive UI design
+* 📱 Fully functional Android application
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## 🛠️ Technologies Used
+
+* **Flutter** – Cross-platform mobile development
+* **Android Studio** – Development environment
+* **Firebase Realtime Database** – Cloud backend
+
+---
+
+## 🔗 Cloud Integration
+
+The app retrieves real-time data from Firebase:
+
+Each node contains:
+
+* Node name & location
+* Fog Level
+* Humidity
+* Warning
+* Last Updated Time
+
+---
+
+## 📊 Status
+
+* ✅ Application Fully Developed
+* ✅ Firebase Integration Completed
+* ✅ Real-Time Data Working
+
+---
+
+> ⚡ *FogGuard App – Smart, Real-Time Road Fog Monitoring System*
