@@ -1,5 +1,8 @@
 # 🌫️🛣️ FogGuard: Roadside Fog Density Monitoring & Accident Prevention System
 
+<br><br>
+![](docs/image/Logo.png)
+<br><br>
 ## 📌 Overview
 
 FogGuard is an **IoT-based intelligent roadside monitoring system** designed to detect fog density in real time and warn drivers about hazardous road conditions. The system combines **embedded systems, wireless communication (LoRa), cloud integration, and a mobile application** to provide proactive safety alerts and reduce fog-related accidents.
@@ -92,8 +95,89 @@ fog_nodes/
          ├── warning
          └── lastUpdated
 ```
+## 🧩Circuit Design
+<br>
+1.Schematic Design<br>
+&nbsp; 
+<table align="center">
+  <tr>
+    <td align="center" style="padding-right: 40px;">
+      <img src="docs/image/Transmitter schematic.png" width="500" /><br>
+      <b>Transmitter schematic diagram</b>
+    </td>
+    <td align="center">
+      <img src="docs/image/Receiver schematic.png" width="500" /><br>
+      <b>Receiver schematic diagram</b>
+    </td>
+  </tr>
+</table>
+
+<br>
+2.PCB Design<br>
+&nbsp; 
+<table align="center">
+  <tr>
+    <td align="center" style="padding-right: 40px;">
+      <img src="docs/image/Transmitter PCB_design.png" width="500" /><br>
+      <b>Transmitter PCB Design</b>
+    </td>
+    <td align="center">
+      <img src="docs/image/Receiver PCB_design.png" width="500" /><br>
+      <b>Receiver PCB Design</b>
+    </td>
+  </tr>
+</table>
+<br>
+3.Fabricated PCB Board<br>
+&nbsp; 
+<table align="center">
+  <tr>
+    <td align="center" style="padding-right: 40px;">
+      <img src="docs/image/Ttansmitter PCB board.jpeg" width="500" /><br>
+      <b>Transmitter Fabricated PCB Board </b>
+    </td>
+    <td align="center">
+      <img src="docs/image/Receiver PCB board.jpeg" width="500" /><br>
+      <b>Receiver Fabricated PCB Board</b>
+    </td>
+  </tr>
+</table>
+<br>
+3.Modules<br>
+&nbsp; 
+<table align="center">
+  <tr>
+    <td align="center" style="padding-right: 40px;">
+      <img src="docs/image/Transmitter module.jpg" width="500" /><br>
+      <b>Transmitter Module </b>
+    </td>
+    <td align="center">
+      <img src="docs/image/Receiver module.jpg" width="500" /><br>
+      <b>Receiver Module</b>
+    </td>
+  </tr>
+  <td align="center">
+      <img src="docs/image/Sensors Module.jpg" width="500" /><br>
+      <b>Sensors Module</b>
+    </td>
+  </tr>
+</table>
+<br>
+
+<br>
 
 ---
+## Full Setup
+&nbsp; 
+<table align="center">
+  <tr>
+    <td align="center" style="padding-right: 40px;">
+      <img src="docs/image/FogGuard Setup.jpg" width="800" /><br>
+      
+    
+  </tr>
+</table>
+
 
 ## ⚙️ How It Works
 
@@ -139,6 +223,22 @@ flutter run
 * ✅ LoRa Communication Working
 * ✅ Firebase Integration Completed
 * ✅ Mobile App UI Completed
+
+---
+## 📊Contribution of Team Members
+<br>
+&nbsp; 
+<table align="center">
+  <tr>
+    <td align="center" style="padding-right: 40px;">
+      <img src="docs/image/Team.jpeg" width="800" /><br>
+      <b>Team FogGuard</b>
+      
+    
+  </tr>
+</table>
+
+
 
 ---
 
